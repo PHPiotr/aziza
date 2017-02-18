@@ -7,11 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class DefaultController extends Controller
+class GalleryController extends Controller
 {
 
     /**
-     * @Route("/", name="default")
+     * @Route("/galeria", name="gallery")
      * @Template()
      */
     public function indexAction(Request $request)

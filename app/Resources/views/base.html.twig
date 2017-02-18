@@ -2,12 +2,87 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Willa Aziza{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
+        {% block stylesheets %}
+            <style>
+                html { 
+                    background: url({{ asset('img/tatry.jpg') }}) no-repeat center center fixed; 
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+                }
+                body {
+                    background: none;
+                }
+                .nav-tabs {
+                    border-bottom: none;
+                }
+                .nav-tabs>li>a {
+                    color: #fff;
+                    padding: 36px 15px 0px 10px;
+                    font-size: 20px;
+                }
+                .nav-tabs>li>a.logo {
+                    font-family: 'Niconne', cursive;
+                    font-size: 45px;
+                    padding: 10px 15px 0 10px;
+                }
+                .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+                    color: #f7941d;
+                    cursor: default;
+                    background-color: transparent;
+                    border: none;
+                    border-bottom-color: transparent;
+                }
+                .nav-tabs>li>a:hover {
+                    border-color: transparent;
+                    background-color: transparent;
+                }
+                hr {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    border: 0;
+                    border-top: 1px solid #f7941d;
+                }
+            </style>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <div class="container">
+            <header>
+                <nav>
+                    <ul class="nav nav-tabs">
+                        <li{% if app.request.attributes.get('_route') starts with 'default' %} class="active"{% endif %}>
+                            <a class="logo" href="{{ path('default') }}">Willa Aziza</a>
+                        </li>
+                        <li{% if app.request.attributes.get('_route') starts with 'offer' %} class="active"{% endif %}>
+                            <a href="{{ path('offer') }}">Oferta</a>
+                        </li>
+                        <li{% if app.request.attributes.get('_route') starts with 'localization' %} class="active"{% endif %}>
+                            <a href="{{ path('localization') }}">Lokalizacja</a>
+                        </li>
+                        <li{% if app.request.attributes.get('_route') starts with 'attractions' %} class="active"{% endif %}>
+                            <a href="{{ path('attractions') }}">Atrakcje</a>
+                        </li>
+                        <li{% if app.request.attributes.get('_route') starts with 'gallery' %} class="active"{% endif %}>
+                            <a href="{{ path('gallery') }}">Galeria</a>
+                        </li>
+                        <li{% if app.request.attributes.get('_route') starts with 'contact' %} class="active"{% endif %}>
+                            <a href="{{ path('contact') }}">Kontakt</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+        <hr />
+        <div class="container">
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+    </div>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
 </html>

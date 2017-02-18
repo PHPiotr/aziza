@@ -7,11 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class DefaultController extends Controller
+class ContactController extends Controller
 {
 
     /**
-     * @Route("/", name="default")
+     * @Route("/kontakt", name="contact")
      * @Template()
      */
     public function indexAction(Request $request)
