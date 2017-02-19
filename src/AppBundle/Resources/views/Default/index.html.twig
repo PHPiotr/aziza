@@ -8,13 +8,32 @@
         }
         .carousel-control img {
             position: relative;
-            top: 160px;
+            top: 40%;
         }
         .carousel-control.left img {
             right: 90px;
         }
         .carousel-control.right img {
             left: 90px;
+        }
+        @media screen and (max-width: 1248px) {
+            .carousel-control.left img {
+                right: 20px;
+            }
+            .carousel-control.right img {
+                left: 20px;
+            }
+        }
+        @media screen and (max-width: 991px) {
+            .carousel-control img {
+                top: 36%;
+            }
+            .carousel-control.left img {
+                right: 60px;
+            }
+            .carousel-control.right img {
+                left: 60px;
+            }
         }
     </style>
 {% endblock %}
