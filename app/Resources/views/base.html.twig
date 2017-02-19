@@ -4,52 +4,12 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Willa Aziza{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-        <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Niconne">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}" />
         {% block stylesheets %}
             <style>
                 html { 
                     background: url({{ asset('img/tatry.jpg') }}) no-repeat center center fixed; 
-                    -webkit-background-size: cover;
-                    -moz-background-size: cover;
-                    -o-background-size: cover;
-                    background-size: cover;
-                }
-                body {
-                    background: none;
-                }
-                .nav-tabs {
-                    border-bottom: none;
-                }
-                .nav-tabs>li>a {
-                    color: #fff;
-                    padding: 36px 15px 0px 10px;
-                    font-size: 20px;
-                    border: none;
-                    border-radius: 0;
-                }
-                .nav-tabs>li>a.logo {
-                    font-family: 'Niconne', cursive;
-                    font-size: 45px;
-                    padding: 10px 15px 0 10px;
-                }
-                .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-                    color: #f7941d;
-                    cursor: default;
-                    background-color: transparent;
-                    border: none;
-                    border-bottom-color: transparent;
-                }
-                .nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
-                    border-color: transparent;
-                    background-color: transparent;
-                    outline: none;
-                    outline-offset: 0;
-                }
-                hr {
-                    margin-top: 0;
-                    margin-bottom: 0;
-                    border: 0;
-                    border-top: 1px solid #f7941d;
                 }
             </style>
         {% endblock %}
