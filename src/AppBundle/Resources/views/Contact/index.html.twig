@@ -1,1 +1,169 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .row {
+            margin-right: 0;
+            margin-left: 0;
+            margin-top: 15px;
+            background: #fff;
+        }
+        .thumbnail {
+            margin-bottom: 0;
+            border: 0;
+        }
+        .thumbnail .caption h3 {
+            text-transform: uppercase;
+            color: #f7941d;
+            font-weight: bold;
+        }
+        .thumbnail .caption p {
+            color: #104f70;
+            font-size: 18px;
+        }
+        .thumbnail .caption h3 span {
+            color: #104f70;
+            display: block;
+            font-weight: normal;
+        }
+
+        .thumbnail div.address address {
+            position: absolute;
+            z-index: 1;
+            color: #fff;
+            text-align: right;
+            width: 90%;
+            font-size: 20px;
+            padding-right: 17px;
+            padding-top: 14px;
+        }
+        .thumbnail div.address address h4 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .thumbnail div.address address h4 span {
+            color: #f7941d;
+        }
+        .thumbnail div.address {
+            position: relative;
+            height: 320px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 320px;
+        }
+        .thumbnail div.address img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        .contact {
+            background-image: url({{ asset('img/willa_aziza_kontakt_tlo.jpg') }});
+            background-repeat: no-repeat;
+            background-color:  #f7941d;
+            height: 400px;
+            margin-top: 0;
+        }
+        .contact h1 {
+            color: #fff;
+        }
+        .contact .form-control {
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+        }
+        .contact .form-control:focus {
+            box-shadow: none;
+        }
+        .contact .col-sm-5,
+        .contact .col-sm-6,
+        .contact .col-sm-7 {
+            padding-left: 0;
+        }
+        .contact .control-label {
+            background-color: #fff;
+            padding: 7px 12px;
+        }
+        .contact .submit input {
+            background: #104f70;
+            color: #fff;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="row contact">
+        <div class="col-sm-offset-4 col-sm-8">
+            <h1>Dowiedz się więcej</h1>
+        </div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="phone" class="col-sm-offset-4 col-sm-1 control-label">Telefon</label>
+                <div class="col-sm-6">
+                    <input type="phone" class="form-control" id="phone" placeholder="zadzwonimy do Ciebie">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-offset-4 col-sm-1 control-label">Email</label>
+                <div class="col-sm-6">
+                    <input type="email" class="form-control" id="email" placeholder="napiszemy do Ciebie">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-7">
+                    <textarea class="form-control" rows="6" name="message"></textarea>
+                </div>
+            </div>
+            <div class="form-group submit">
+                <div class="col-sm-offset-9 col-sm-2">
+                    <input type="submit" class="form-control" value="Wyślij">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Bezpłatne <span>wi-fi</span></h3>
+                </div>
+                <img src="{{ asset('img/willa_aziza_bezplatne_wifi.jpg') }}" alt="Willa Aziza - bezpłatne wi-fi">
+                <div class="caption">
+                    <p>Dostęp do Internetu na terenie całej willi Aziza za darmo. Bezpłatny parking.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Organizacja <span>kuligów</span></h3>
+                </div>
+                <img src="{{ asset('img/willa_aziza_organizacja_kuligow.jpg') }}" alt="Willa Aziza - organizacja kuligów">
+                <div class="caption">
+                    <p>Skutery śnieżne - wypożyczalnia, szkółka jeździecka - 300m obok, lecznicze masaże ajurwedyjskie.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Blisko <span>Zakopane</span></h3>
+                </div>
+                <div class="address">
+                    <img src="{{ asset('img/willa_aziza_blisko_zakopanego.jpg') }}" alt="Willa Aziza - blisko Zakopane">
+                    <address>
+                        <h4>WILLA <span>AZIZA</span></h4>
+                        <p>34-511 Kościelisko</p>
+                        <p>ul. Groń 20</p>
+                        <h4>TELEFON</h4>
+                        <p>+48 601 472 490</p>
+                        <h4>EMAIL</h4>
+                        <p>willa@aziza.pl</p>
+                    </address>
+                </div>
+                <div class="caption last">
+                    <p>Tatrzański Park Narodowy, szlaki turystyczne, ścieżki, rowerowe. 7 km do Zakopanego.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
