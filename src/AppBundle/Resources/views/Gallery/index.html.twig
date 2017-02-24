@@ -1,1 +1,116 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .row {
+            margin-right: 0;
+            margin-left: 0;
+            margin-top: 15px;
+            background: #fff;
+            padding-bottom: 50px;
+        }
+        .thumbnail {
+            margin-bottom: 0;
+            border: 0;
+        }
+        .thumbnail .caption h3 {
+            text-transform: uppercase;
+            color: #f7941d;
+            font-weight: bold;
+        }
+        .thumbnail .caption p {
+            color: #104f70;
+            font-size: 18px;
+        }
+        .thumbnail .caption h3 span {
+            color: #104f70;
+            display: block;
+            font-weight: normal;
+        }
+        .gallery .thumbnail a {
+            position: relative;
+            display: block;
+            height: 320px;
+            width: 320px;
+        }
+        .gallery .thumbnail img {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .gallery .thumbnail .sign {
+            top: 133px;
+            left: 125px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="row gallery">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Apartament <span>na poddaszu</span></h3>
+                </div>
+                <a href="{{ path('gallery', {'slug': 'apartament-na-poddaszu'}) }}" title="Apartament na poddaszu">
+                    <img src="{{ asset('img/galerie/apartament-na-poddaszu.jpg') }}" alt="Apartament na poddaszu">
+                    <img class="sign" src="{{ asset('img/znaki/szlak_czerwony.jpg') }}" alt="Szlak czerwony">
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Pokój <span>niebieski</span></h3>
+                </div>
+                <a href="{{ path('gallery', {'slug': 'pokoj-niebieski'}) }}" title="Pokój niebieski">
+                    <img src="{{ asset('img/galerie/pokoj-niebieski.jpg') }}" alt="Pokój niebieski">
+                    <img class="sign" src="{{ asset('img/znaki/szlak_niebieski.jpg') }}" alt="Szlak niebieski">
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Pokój <span>zielony</span></h3>
+                </div>
+                <a href="{{ path('gallery', {'slug': 'pokoj-zielony'}) }}" title="Pokój zielony">
+                    <img src="{{ asset('img/galerie/pokoj-zielony.jpg') }}" alt="Pokój zielony">
+                    <img class="sign" src="{{ asset('img/znaki/szlak_zielony.jpg') }}" alt="Szlak zielony">
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Pokój <span>pomarańczowy</span></h3>
+                </div>
+                <a href="{{ path('gallery', {'slug': 'pokoj-pomaranczowy'}) }}" title="Pokój pomarańczowy">
+                    <img src="{{ asset('img/galerie/pokoj-pomaranczowy.jpg') }}" alt="Pokój pomarańczowy">
+                    <img class="sign" src="{{ asset('img/znaki/szlak_pomaranczowy.jpg') }}" alt="Szlak pomarańczowy">
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Pokój <span>karmelowy</span></h3>
+                </div>
+                <a href="{{ path('gallery', {'slug': 'pokoj-karmelowy'}) }}" title="Pokój karmelowy">
+                    <img src="{{ asset('img/galerie/pokoj-karmelowy.jpg') }}" alt="Pokój karmelowy">
+                    <img class="sign" src="{{ asset('img/znaki/szlak_karmelowy.jpg') }}" alt="Szlak karmelowy">
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>Willa <span>Aziza i okolica</span></h3>
+                </div>
+                <a href="{{ path('gallery', {'slug': 'willa-aziza'}) }}" title="Willa Aziza">
+                    <img src="{{ asset('img/galerie/willa-aziza.jpg') }}" alt="Willa Aziza">
+                    <img class="sign" src="{{ asset('img/znaki/szlak_zolty.jpg') }}" alt="Szlak żółty">
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
