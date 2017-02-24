@@ -51,9 +51,14 @@ class ContactController extends Controller
 
         $message = \Swift_Message::newInstance()
                 ->setSubject('Willa Aziza')
-                ->setFrom($request->get('email'))
-                ->setTo('willa@aziza.com')
-                ->setBody($request->get('message'), 'text/plain');
+                ->setFrom($contact->email)
+                ->setTo('willa@aziza.pl')
+                ->setBody($this->renderView('AppBundle:Contact:email.html.twig', [
+                    'message' => $contact->message,
+                    'phone' => $contact->phone,
+                    'email' => $contact->email,
+                    'date' => date('d.m.Y H:i:s')
+                ]), 'text/html');
 
         $sent = $this->get('mailer')->send($message);
 
