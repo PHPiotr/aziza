@@ -1,1 +1,58 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}" />
+    <style>
+        .row {
+            margin-right: 0;
+            margin-left: 0;
+            margin-top: 15px;
+        }
+        #map {
+            height: 800px;
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div id="map"></div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    <script>
+        function initMap() {
+            var koscielisko = {lat: 49.283526, lng: 19.870541};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14,
+                center: koscielisko,
+                mapTypeId: google.maps.MapTypeId.HYBRID,
+                mapTypeControl: true,
+                mapTypeControlOptions: {
+                    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                    position: google.maps.ControlPosition.TOP_CENTER
+                }
+            });
+            var contentString = '<div style="width:345px"><h2 class="gm-title">{{ title }}</h2><p>{{ content }}</p></div>';
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                position: {lat: 49.286526, lng: 19.870541}
+            });
+
+            infowindow.open(map);
+            map.setCenter(new google.maps.LatLng('49.283526', '19.990541'));
+
+            var iconBase = '{{ asset('img/hot_spot.png')}}';
+            var marker = new google.maps.Marker({
+                position: koscielisko,
+                map: map,
+                icon: iconBase
+            });
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&&callback=initMap"></script>
+{% endblock %}
