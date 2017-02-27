@@ -1,1 +1,60 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .row {
+            margin-right: 0;
+            margin-left: 0;
+            margin-top: 15px;
+            background: #fff;
+            padding-bottom: 20px;
+        }
+        h1 {
+            font-weight: bold;
+            color: #f7941d;
+            padding-left: 20px;
+        }
+        h1 span {
+            font-weight: normal;
+            color: #104f70;
+        }
+        .list-group {
+            margin-bottom: 0;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    {% include 'carousel.html.twig' %}
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <h1>Atrakcje <span> w okolicy</span></h1>
+            <ul class="list-group">
+                <li class="list-group-item">Bliskość szlaków turystycznych i rowerowych (Dolina Kościeliska, Dolina Chochołowska)</li>
+                <li class="list-group-item">Szkółka jeździecka w odległości 300m</li>
+                <li class="list-group-item">Wypożyczalnia skuterów śnieżnych</li>
+                <li class="list-group-item">Możliwość zorganizowania kuligów</li>
+                <li class="list-group-item">Termy Chochołowskie - największe temy na Podhalu - 13km</li>
+                <li class="list-group-item">Skansen Chcchołów</li>
+                <li class="list-group-item">Przejście graniczne Sucha Hora (Słowacja) - 15km</li>
+                <li class="list-group-item">Zakopane - 7km</li>
+                <li class="list-group-item">Gubałówka - 8km</li>
+                <li class="list-group-item">Na miejscu możliwość wykupienia masażu ajurwedyjskiego</li>
+                <li class="list-group-item">Baseny termalne Oravice (Słowacja) - 28km</li>
+                <li class="list-group-item">Szymaszkowa - stacja narciarska - 5km</li>
+                <li class="list-group-item">Witów - stacja narciarska <quote>Witów-ski</quote> - 8km</li>
+                <li class="list-group-item">Jazda na nartach biegowych i zjazdowych</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <h1>Udogodnienia <span> w obiekcie</span></h1>
+            <ul class="list-group">
+                <li class="list-group-item">Komfortowe pokoje z łazienkami</li>
+                <li class="list-group-item">Możliwość płatności kartą</li>
+                <li class="list-group-item">Darmowy internet bezprzewodowy na terenie całej willi</li>
+                <li class="list-group-item">Bezpłatny parking</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

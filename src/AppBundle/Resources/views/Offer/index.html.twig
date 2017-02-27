@@ -1,1 +1,42 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .row {
+            margin-right: 0;
+            margin-left: 0;
+            margin-top: 15px;
+            background: #fff;
+            padding-bottom: 20px;
+        }
+        h1 {
+            font-weight: bold;
+            color: #f7941d;
+            padding-left: 20px;
+        }
+        h1 span {
+            font-weight: normal;
+            color: #104f70;
+        }
+        .list-group {
+            margin-bottom: 0;
+        }
+        .jumbotron {
+            background-color: #fff;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    {% include 'carousel.html.twig' %}
+    <div class="row">
+        <h1>Oferta <span> pokoi gościnnych</span></h1>
+        <div class="jumbotron">
+            <p>Do Państwa dyspozycji oddajemy trzy pokoje dwuosobowe z wygodnymi małżeńskimmi łóżkami i balkonami. Jeden z pokoi posiada dwa pojedyncze łóźka. Każdy pokój wyposażony jest w łazienkę z kabiną prysznicową, zestaw ręczników i suszarkę do włosów.</p>
+            <p>W pokojach znajdują się stoliki z krzesłami, szafa, komoda, lodówka, czajnik, filiżanki, telewizor LCD.</p>
+            <p>Niemal wszystkie pokoje mają widok na góry.</p>
+            <p>W apartamencie na poddaszu znajdują się aneks kuchenny i część wypoczynkowa.</p>
+            <p>Gwarantujemy niezapomniany klimat, miłą i spokojną atmosferę.</p>
+            <h2>Zapraszamy!</h2>
+        </div>
+    </div>
+{% endblock %}

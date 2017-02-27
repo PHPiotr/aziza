@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Willa Aziza{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Niconne">
@@ -9,7 +10,7 @@
         {% block stylesheets %}
             <style>
                 html { 
-                    background: url({{ asset('img/tatry.jpg') }}) no-repeat center center fixed; 
+                    background:  #104f70 url({{ asset('img/tatry.jpg') }}) no-repeat center center fixed; 
                 }
             </style>
         {% endblock %}
@@ -26,12 +27,10 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
+                        <a class="logo{% if app.request.attributes.get('_route') starts with 'default' %} active{% endif %}" href="{{ path('default') }}">Willa Aziza</a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-left">
-                            <li{% if app.request.attributes.get('_route') starts with 'default' %} class="active"{% endif %}>
-                                <a class="logo" href="{{ path('default') }}">Willa Aziza</a>
-                            </li>
                             <li{% if app.request.attributes.get('_route') starts with 'offer' %} class="active"{% endif %}>
                                 <a href="{{ path('offer') }}">Oferta</a>
                             </li>

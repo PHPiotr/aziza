@@ -18,17 +18,25 @@ header .navbar-collapse {
 }
 header .nav.navbar-nav>li>a {
     color: #fff;
-    padding: 22px 15px 0px 10px;
+    padding: 30px 15px 0px 10px;
     font-size: 20px;
     border: none;
     border-radius: 0;
     text-transform: uppercase;
 }
-header .nav.navbar-nav>li>a.logo {
+a.logo {
     font-family: 'Niconne', cursive;
     font-size: 45px;
     padding: 15px 15px 0 0;
     text-transform: none;
+    color: #fff;
+}
+a.logo:focus,
+a.logo:hover {
+    text-decoration: none;
+}
+a.logo.active {
+    color: #f7941d;
 }
 
 header .nav.navbar-nav>li.active>a,
@@ -64,7 +72,44 @@ footer .navbar-default .navbar-nav>.active>a:hover {
     color: #fff;
     background-color: transparent;
 }
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+    opacity: 1;
+}
+.carousel-control img {
+    position: relative;
+    top: 40%;
+}
+.carousel-control.left img {
+    right: 90px;
+}
+.carousel-control.right img {
+    left: 90px;
+}
+@media screen and (max-width: 1248px) {
+    .carousel-control.left img {
+        right: 20px;
+    }
+    .carousel-control.right img {
+        left: 20px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .carousel-control img {
+        top: 36%;
+    }
+    .carousel-control.left img {
+        right: 60px;
+    }
+    .carousel-control.right img {
+        left: 60px;
+    }
+}
 @media (min-width: 768px) {
+    header .nav.navbar-nav>li>a {
+        padding: 30px 0px 0px 10px;
+        font-size: 17px;
+    }
     footer .collapse.navbar-collapse {
         text-align: center;
     }
@@ -74,5 +119,36 @@ footer .navbar-default .navbar-nav>.active>a:hover {
     footer .navbar-nav>li {
         float: none;
         display: inline-block;
+    }
+}
+@media (max-width: 767px) {
+    header .nav.navbar-nav>li>a {
+        padding: 15px;
+    }
+    .navbar-nav {
+        margin: 7.5px 4px;
+    }
+    a.logo {
+        padding: 15px 15px 0 8px;
+    }
+    .carousel-control.left img {
+        right: 10px;
+    }
+    .carousel-control.right img {
+        left: 10px;
+    }
+    .form-horizontal .form-group {
+        padding-left: 15px;
+    }
+    .contact .control-label {
+        float: left;
+        width: 25%;
+    }
+    .contact .col-sm-6 {
+        float: left;
+        width: 75%;
+    }
+    .contact .col-sm-offset-9.col-sm-2 {
+        padding-left: 0;
     }
 }
