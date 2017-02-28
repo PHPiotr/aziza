@@ -3,10 +3,6 @@
 {% block title %}{{ parent() }} - {{ name_first~' '~name_last }} {% endblock %}
 {% block description %}{{ name_first~' '~name_last }} - galeria fotografii{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}" />
-{% endblock %}
 {% block body %}
     <div class="row gallery">
         <h1>{{ name_first }} <span>{{ name_last }}</span></h1>
@@ -20,8 +16,4 @@
             </div>
         {% endfor %}
     </div>
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/lightbox.js') }}"></script>
 {% endblock %}
