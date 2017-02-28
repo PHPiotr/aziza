@@ -23,21 +23,6 @@ html {
 body {
     background: none;
 }
-body:after {
-    content: url('../img/lighbox/close.png') url('../img/lighbox/loading.gif') url('../img/lighbox/prev.png') url('../img/lighbox/next.png');
-}
-.lb-cancel {
-    background: url('../img/lighbox/loading.gif') no-repeat;
-}
-.lb-nav a.lb-prev {
-    background: url('../img/lighbox/prev.png') left 48% no-repeat;
-}
-.lb-nav a.lb-next {
-    background: url('../img/lighbox/next.png') right 48% no-repeat;
-}
-.lb-data .lb-close {
-    background: url('../img/lighbox/close.png') top right no-repeat;
-}
 .row {
     margin-right: 0;
     margin-left: 0;

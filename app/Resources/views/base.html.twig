@@ -8,7 +8,6 @@
         {% block stylesheets %}
             {% stylesheets 
                 'css/bootstrap.min.css'
-                'css/lightbox.css'
                 'css/custom.css'
                 filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -101,8 +100,7 @@
 {% block javascripts %}
     {% javascripts
         '@AppBundle/Resources/public/js/jquery.js'
-        '@AppBundle/Resources/public/js/bootstrap.js'
-        '@AppBundle/Resources/public/js/lightbox.js' %}
+        '@AppBundle/Resources/public/js/bootstrap.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

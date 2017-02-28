@@ -42,8 +42,9 @@
     </div>
 {% endblock %}
 {% block javascripts %}
-    {{ parent() }}
     {% javascripts
+        '@AppBundle/Resources/public/js/jquery.js'
+        '@AppBundle/Resources/public/js/bootstrap.js'
         '@AppBundle/Resources/public/js/react/react.js'
         '@AppBundle/Resources/public/js/react/react-dom.js'
         '@AppBundle/Resources/public/js/react/components/contact.js' %}

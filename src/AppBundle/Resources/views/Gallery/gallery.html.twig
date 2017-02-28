@@ -2,7 +2,16 @@
 
 {% block title %}{{ parent() }} - {{ name_first~' '~name_last }} {% endblock %}
 {% block description %}{{ name_first~' '~name_last }} - galeria fotografii{% endblock %}
-
+{% block stylesheets %}
+    {% stylesheets 
+        'css/bootstrap.min.css'
+        'css/lightbox.css'
+        'css/custom.css'
+        'css/custom_lightbox.css'
+        filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
 {% block body %}
     <div class="row gallery">
         <h1>{{ name_first }} <span>{{ name_last }}</span></h1>
@@ -16,4 +25,12 @@
             </div>
         {% endfor %}
     </div>
+{% endblock %}
+{% block javascripts %}
+    {% javascripts
+        '@AppBundle/Resources/public/js/jquery.js'
+        '@AppBundle/Resources/public/js/bootstrap.js'
+        '@AppBundle/Resources/public/js/lightbox.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
