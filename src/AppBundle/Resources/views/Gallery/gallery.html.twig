@@ -6,23 +6,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}" />
-    <style>
-        body:after {
-            content: url({{ asset('img/lighbox/close.png') }}) url({{ asset('img/lighbox/loading.gif') }}) url({{ asset('img/lighbox/prev.png') }}) url({{ asset('img/lighbox/next.png') }});
-        }
-        .lb-cancel {
-            background: url({{ asset('img/lighbox/loading.gif') }}) no-repeat;
-        }
-        .lb-nav a.lb-prev {
-            background: url({{ asset('img/lighbox/prev.png') }}) left 48% no-repeat;
-        }
-        .lb-nav a.lb-next {
-            background: url({{ asset('img/lighbox/next.png') }}) right 48% no-repeat;
-        }
-        .lb-data .lb-close {
-            background: url({{ asset('img/lighbox/close.png') }}) top right no-repeat;
-        }
-    </style>
 {% endblock %}
 {% block body %}
     <div class="row gallery">
