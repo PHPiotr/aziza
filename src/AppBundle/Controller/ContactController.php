@@ -67,10 +67,10 @@ class ContactController extends Controller
         $sent = mail($to, $subject, $message, implode("\r\n", $headers), '-f ' . $contact->email);
 
         if (!$sent) {
-            return JsonResponse::create(['ok' => false, 'errors' => [], 'msg' => 'Problem podczas wysyłania']);
+            return JsonResponse::create(['ok' => false, 'errors' => [], 'msg' => 'Problem z wysyłką']);
         }
 
-        return JsonResponse::create(['ok' => true, 'errors' => [], 'msg' => 'Wiadomość została wysłana']);
+        return JsonResponse::create(['ok' => true, 'errors' => [], 'msg' => 'Wiadomość wysłana']);
     }
 
 }

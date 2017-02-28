@@ -11,7 +11,9 @@
                     <h3>Apartament <span>na poddaszu</span></h3>
                 </div>
                 <a href="{{ path('gallery', {'slug': 'apartament-na-poddaszu'}) }}" title="Apartament na poddaszu">
-                    <img src="{{ asset('img/galerie/apartament-na-poddaszu.jpg') }}" alt="Apartament na poddaszu">
+                    {% image '@AppBundle/Resources/public/img/galerie/apartament-na-poddaszu.jpg' %}
+                        <img src="{{ asset_url }}" alt="Apartament na poddaszu" />
+                    {% endimage %}
                 </a>
             </div>
         </div>
@@ -21,7 +23,9 @@
                     <h3>Pokój <span>niebieski</span></h3>
                 </div>
                 <a href="{{ path('gallery', {'slug': 'pokoj-niebieski'}) }}" title="Pokój niebieski">
-                    <img src="{{ asset('img/galerie/pokoj-niebieski.jpg') }}" alt="Pokój niebieski">
+                    {% image '@AppBundle/Resources/public/img/galerie/pokoj-niebieski.jpg' %}
+                        <img src="{{ asset_url }}" alt="Pokój niebieski" />
+                    {% endimage %}
                 </a>
             </div>
         </div>
@@ -31,7 +35,9 @@
                     <h3>Pokój <span>zielony</span></h3>
                 </div>
                 <a href="{{ path('gallery', {'slug': 'pokoj-zielony'}) }}" title="Pokój zielony">
-                    <img src="{{ asset('img/galerie/pokoj-zielony.jpg') }}" alt="Pokój zielony">
+                    {% image '@AppBundle/Resources/public/img/galerie/pokoj-zielony.jpg' %}
+                        <img src="{{ asset_url }}" alt="Pokój zielony" />
+                    {% endimage %}
                 </a>
             </div>
         </div>
@@ -41,7 +47,9 @@
                     <h3>Pokój <span>pomarańczowy</span></h3>
                 </div>
                 <a href="{{ path('gallery', {'slug': 'pokoj-pomaranczowy'}) }}" title="Pokój pomarańczowy">
-                    <img src="{{ asset('img/galerie/pokoj-pomaranczowy.jpg') }}" alt="Pokój pomarańczowy">
+                    {% image '@AppBundle/Resources/public/img/galerie/pokoj-pomaranczowy.jpg' %}
+                        <img src="{{ asset_url }}" alt="Pokój pomarańczowy" />
+                    {% endimage %}
                 </a>
             </div>
         </div>
@@ -51,7 +59,9 @@
                     <h3>Pokój <span>karmelowy</span></h3>
                 </div>
                 <a href="{{ path('gallery', {'slug': 'pokoj-karmelowy'}) }}" title="Pokój karmelowy">
-                    <img src="{{ asset('img/galerie/pokoj-karmelowy.jpg') }}" alt="Pokój karmelowy">
+                    {% image '@AppBundle/Resources/public/img/galerie/pokoj-karmelowy.jpg' %}
+                        <img src="{{ asset_url }}" alt="Pokój karmelowy" />
+                    {% endimage %}
                 </a>
             </div>
         </div>
@@ -61,7 +71,9 @@
                     <h3>Willa <span>Aziza i okolica</span></h3>
                 </div>
                 <a href="{{ path('gallery', {'slug': 'willa-aziza'}) }}" title="Willa Aziza">
-                    <img src="{{ asset('img/galerie/willa-aziza.jpg') }}" alt="Willa Aziza">
+                    {% image '@AppBundle/Resources/public/img/galerie/willa-aziza.jpg' %}
+                        <img src="{{ asset_url }}" alt="Willa Aziza" />
+                    {% endimage %}
                 </a>
             </div>
         </div>
