@@ -49,18 +49,22 @@ class ContactController extends Controller
             return JsonResponse::create(['ok' => false, 'errors' => $errors]);
         }
 
-        $message = \Swift_Message::newInstance()
-                ->setSubject('Willa Aziza')
-                ->setFrom($contact->email)
-                ->setTo('willa@aziza.pl')
-                ->setBody($this->renderView('AppBundle:Contact:email.html.twig', [
-                    'message' => $contact->message,
-                    'phone' => $contact->phone,
-                    'email' => $contact->email,
-                    'date' => date('d.m.Y H:i:s')
-                ]), 'text/html');
+        $message = $this->renderView('AppBundle:Contact:email.html.twig', [
+            'message' => $contact->message,
+            'phone' => $contact->phone,
+            'email' => $contact->email,
+            'date' => date('d.m.Y H:i:s')
+        ]);
 
-        $sent = $this->get('mailer')->send($message);
+        $to = $this->getParameter('mailer_to');
+        $subject = 'Willa Aziza';
+
+        $headers[] = sprintf('From: %s', $contact->email);
+        $headers[] = sprintf('Reply-To: %s', $contact->email);
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-Type: text/html; charset=UTF-8';
+
+        $sent = mail($to, $subject, $message, implode("\r\n", $headers), '-f ' . $contact->email);
 
         if (!$sent) {
             return JsonResponse::create(['ok' => false, 'errors' => [], 'msg' => 'Problem podczas wysyłania']);
