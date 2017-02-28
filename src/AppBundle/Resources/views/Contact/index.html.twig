@@ -6,63 +6,8 @@
 {% block stylesheets %}
     {{ parent() }}
     <style>
-        .row {
-            margin-right: 0;
-            margin-left: 0;
-            margin-top: 15px;
-            background: #fff;
-        }
-        .thumbnail {
-            margin-bottom: 0;
-            border: 0;
-        }
-        .thumbnail .caption h3 {
-            text-transform: uppercase;
-            color: #f7941d;
-            font-weight: bold;
-        }
-        .thumbnail .caption p {
-            color: #104f70;
-            font-size: 18px;
-        }
-        .thumbnail .caption h3 span {
-            color: #104f70;
-            display: block;
-            font-weight: normal;
-        }
         .contact {
             background-image: url({{ asset('img/willa_aziza_kontakt_tlo.jpg') }});
-            background-repeat: no-repeat;
-            background-color:  #f7941d;
-            height: 400px;
-            margin-top: 0;
-        }
-        .contact h1 {
-            color: #fff;
-        }
-        .contact .form-control {
-            border-radius: 0;
-            border: none;
-            box-shadow: none;
-        }
-        .contact .form-control:focus {
-            box-shadow: none;
-        }
-        .contact .col-sm-5,
-        .contact .col-sm-6,
-        .contact .col-sm-7 {
-            padding-left: 0;
-        }
-        .contact .control-label {
-            background-color: #fff;
-            padding: 7px 12px;
-        }
-        .contact .submit input {
-            background: #104f70;
-            color: #fff;
-        }
-        .popover-content {
-            color: #f7941d;
         }
     </style>
 {% endblock %}
@@ -105,6 +50,7 @@
     </div>
 {% endblock %}
 {% block javascripts %}
+    {{ parent() }}
     {% javascripts
         '@AppBundle/Resources/public/js/react/react.js'
         '@AppBundle/Resources/public/js/react/react-dom.js'

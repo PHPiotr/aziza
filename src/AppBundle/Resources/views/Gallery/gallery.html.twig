@@ -22,45 +22,10 @@
         .lb-data .lb-close {
             background: url({{ asset('img/lighbox/close.png') }}) top right no-repeat;
         }
-        .row {
-            margin-right: 0;
-            margin-left: 0;
-            margin-top: 15px;
-            background: #fff;
-            padding-bottom: 50px;
-        }
-        .thumbnail {
-            margin-bottom: 0;
-            border: 0;
-            margin-top: 30px;
-        }
-        .thumbnail .caption h3 {
-            text-transform: uppercase;
-            color: #f7941d;
-            font-weight: bold;
-        }
-        .thumbnail .caption p {
-            color: #104f70;
-            font-size: 18px;
-        }
-        .thumbnail .caption h3 span {
-            color: #104f70;
-            display: block;
-            font-weight: normal;
-        }
-        h1 {
-            font-weight: bold;
-            color: #f7941d;
-            padding-left: 20px;
-        }
-        h1 span {
-            font-weight: normal;
-            color: #104f70;
-        }
     </style>
 {% endblock %}
 {% block body %}
-    <div class="row">
+    <div class="row gallery">
         <h1>{{ name_first }} <span>{{ name_last }}</span></h1>
         {% for key, image in images %}
             <div class="col-sm-6 col-md-4">
@@ -74,5 +39,6 @@
     </div>
 {% endblock %}
 {% block javascripts %}
+    {{ parent() }}
     <script src="{{ asset('js/lightbox.js') }}"></script>
 {% endblock %}

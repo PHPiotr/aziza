@@ -7,6 +7,100 @@ html {
 body {
     background: none;
 }
+.row {
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 15px;
+    background: #fff;
+}
+.row.attractions {
+    padding-bottom: 20px;
+}
+h1 {
+    font-weight: bold;
+    color: #f7941d;
+    padding-left: 20px;
+}
+h1 span {
+    font-weight: normal;
+    color: #104f70;
+}
+.list-group {
+    margin-bottom: 0;
+}
+.thumbnail {
+    margin-bottom: 0;
+    border: 0;
+}
+.thumbnail .caption h3 {
+    text-transform: uppercase;
+    color: #f7941d;
+    font-weight: bold;
+}
+.thumbnail .caption p {
+    color: #104f70;
+    font-size: 18px;
+}
+.thumbnail .caption h3 span {
+    color: #104f70;
+    display: block;
+    font-weight: normal;
+}
+.contact {
+    background-repeat: no-repeat;
+    background-color:  #f7941d;
+    height: 400px;
+    margin-top: 0;
+}
+.contact h1 {
+    color: #fff;
+}
+.contact .form-control {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+.contact .form-control:focus {
+    box-shadow: none;
+}
+.contact .col-sm-5,
+.contact .col-sm-6,
+.contact .col-sm-7 {
+    padding-left: 0;
+}
+.contact .control-label {
+    background-color: #fff;
+    padding: 7px 12px;
+}
+.contact .submit input {
+    background: #104f70;
+    color: #fff;
+}
+.popover-content {
+    color: #f7941d;
+}
+#map {
+    height: 810px;
+    width: 100%;
+}
+default.row {
+    padding-bottom: 20px;
+}
+.default .list-group {
+    margin-bottom: 0;
+}
+.default .jumbotron {
+    background-color: #fff;
+}
+.galleries.row {
+    padding-bottom: 50px;
+}
+.gallery.row {
+    padding-bottom: 50px;
+}
+.gallery .thumbnail {
+    margin-top: 30px;
+}
 header .navbar-default {
     background-color: transparent;
     border-color: #f7941d;
@@ -51,6 +145,9 @@ header .nav.navbar-nav>li.active>a:hover {
 header .navbar-default .navbar-nav>li>a:focus,
 header .navbar-default .navbar-nav>li>a:hover {
     color: #fff;
+}
+header .navbar-right .fb {
+    padding-top: 25px;
 }
 footer .navbar-default {
     background: #104f70;

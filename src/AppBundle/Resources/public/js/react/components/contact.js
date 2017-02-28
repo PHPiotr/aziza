@@ -32,7 +32,7 @@ var Contact = React.createClass({
         var defaultHeaderText = self.state.headerText;
 
         $.ajax({
-            url: '/kontakt/wyslij',
+            url: 'kontakt/wyslij',
             type: 'post',
             dataType: 'json',
             data: {

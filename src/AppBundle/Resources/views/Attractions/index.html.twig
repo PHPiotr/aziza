@@ -3,33 +3,9 @@
 {% block title %}{{ parent() }} - atrakcje{% endblock %}
 {% block description %}Tatrzański Park Narodowy, szkółka jeździecka, skutery śnieżne, kuligi{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .row {
-            margin-right: 0;
-            margin-left: 0;
-            margin-top: 15px;
-            background: #fff;
-            padding-bottom: 20px;
-        }
-        h1 {
-            font-weight: bold;
-            color: #f7941d;
-            padding-left: 20px;
-        }
-        h1 span {
-            font-weight: normal;
-            color: #104f70;
-        }
-        .list-group {
-            margin-bottom: 0;
-        }
-    </style>
-{% endblock %}
 {% block body %}
     {% include 'carousel.html.twig' %}
-    <div class="row">
+    <div class="row attractions">
         <div class="col-sm-12 col-md-12">
             <h1>Atrakcje <span> w okolicy</span></h1>
             <ul class="list-group">
@@ -38,7 +14,7 @@
                 <li class="list-group-item">Wypożyczalnia skuterów śnieżnych</li>
                 <li class="list-group-item">Możliwość zorganizowania kuligów</li>
                 <li class="list-group-item">Termy Chochołowskie - największe temy na Podhalu - 13km</li>
-                <li class="list-group-item">Skansen Chcchołów</li>
+                <li class="list-group-item">Skansen Chochołów</li>
                 <li class="list-group-item">Przejście graniczne Sucha Hora (Słowacja) - 15km</li>
                 <li class="list-group-item">Zakopane - 7km</li>
                 <li class="list-group-item">Gubałówka - 8km</li>
@@ -50,7 +26,7 @@
             </ul>
         </div>
     </div>
-    <div class="row">
+    <div class="row attractions">
         <div class="col-sm-12 col-md-12">
             <h1>Udogodnienia <span> w obiekcie</span></h1>
             <ul class="list-group">

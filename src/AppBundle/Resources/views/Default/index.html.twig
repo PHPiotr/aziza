@@ -1,33 +1,4 @@
 {% extends 'base.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .row {
-            margin-right: 0;
-            margin-left: 0;
-            margin-top: 15px;
-            background: #fff;
-        }
-        .thumbnail {
-            margin-bottom: 0;
-            border: 0;
-        }
-        .thumbnail .caption h3 {
-            text-transform: uppercase;
-            color: #f7941d;
-            font-weight: bold;
-        }
-        .thumbnail .caption p {
-            color: #104f70;
-            font-size: 18px;
-        }
-        .thumbnail .caption h3 span {
-            color: #104f70;
-            display: block;
-            font-weight: normal;
-        }
-    </style>
-{% endblock %}
 {% block body %}
     {% include 'carousel.html.twig' %}
     <div class="row">

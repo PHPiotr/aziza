@@ -3,28 +3,13 @@
 {% block title %}{{ parent() }} - lokalizacja{% endblock %}
 {% block description %}Kościelisko leży na zachód od Zakopanego na zboczah pasma gubałowskiego w pobliżu Doliny Kościeliskiej.{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}" />
-    <style>
-        .row {
-            margin-right: 0;
-            margin-left: 0;
-            margin-top: 15px;
-        }
-        #map {
-            height: 810px;
-            width: 100%;
-        }
-    </style>
-{% endblock %}
 {% block body %}
     <div class="row">
         <div id="map"></div>
     </div>
 {% endblock %}
 {% block javascripts %}
-
+    {{ parent() }}
     <script>
         function initMap() {
             var koscielisko = {lat: 49.283526, lng: 19.870541};
