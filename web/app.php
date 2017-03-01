@@ -1,5 +1,12 @@
 <?php
 
+$protocol = (@$_SERVER["HTTPS"] == 'on') ? 'https://' : 'http://';
+
+if (substr($_SERVER['HTTP_HOST'], 0, 4) !== 'www.') {
+    header('Location: '.$protocol.'www.'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+    exit;
+}
+
 use Symfony\Component\HttpFoundation\Request;
 
 /** @var \Composer\Autoload\ClassLoader $loader */
