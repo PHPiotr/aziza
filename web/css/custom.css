@@ -205,6 +205,16 @@ footer .navbar-default .navbar-nav>.active>a:hover {
 .carousel-control.right img {
     left: 90px;
 }
+footer .collapse.navbar-collapse {
+    text-align: center;
+}
+.navbar-nav {
+    float: none;
+}
+footer .navbar-nav>li {
+    float: none;
+    display: inline-block;
+}
 @media screen and (max-width: 1248px) {
     .carousel-control.left img {
         right: 20px;
@@ -223,16 +233,6 @@ footer .navbar-default .navbar-nav>.active>a:hover {
     header .nav.navbar-nav>li>a {
         padding: 30px 0px 0px 10px;
         font-size: 15px;
-    }
-    footer .collapse.navbar-collapse {
-        text-align: center;
-    }
-    .navbar-nav {
-        float: none;
-    }
-    footer .navbar-nav>li {
-        float: none;
-        display: inline-block;
     }
 }
 @media screen and (max-width: 767px) {
