@@ -19,7 +19,7 @@ class LocalizationController extends Controller
         return [
             'title' => 'Willa Aziza w Kościelisku',
             'content' => 'Kościelisko usytuowane jest na zachód od Zakopanego, '
-            . 'składa się z wielu osiedli rozrzuconych na zboczah pasma gubałowskiego. '
+            . 'składa się z wielu osiedli rozrzuconych na zboczach pasma gubałowskiego. '
             . 'Nazwa wywodzi się od polany Stare Kościeliska w pobliskiej Dolinie Kościeliskiej.',
         ];
     }
