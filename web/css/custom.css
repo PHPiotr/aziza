@@ -75,6 +75,7 @@ h1 span {
 .contact h1 {
     color: #fff;
     padding-left: 0;
+    font-weight: normal;
 }
 .contact .form-control {
     border-radius: 0;
@@ -217,7 +218,7 @@ footer .navbar-default .navbar-nav>.active>a:hover {
         background:  #104f70;
     }
     .carousel-control img {
-        top: 90px;
+        top: 95px;
     }
     header .nav.navbar-nav>li>a {
         padding: 30px 0px 0px 10px;
@@ -253,6 +254,9 @@ footer .navbar-default .navbar-nav>.active>a:hover {
         -o-background-size: cover;
         background-size: cover;
         background-color: #104f70;
+    }
+    .contact h1 {
+        padding-left: 10px;
     }
     .contact .control-label {
         float: left;
