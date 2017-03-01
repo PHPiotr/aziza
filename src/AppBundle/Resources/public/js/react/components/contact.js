@@ -86,7 +86,7 @@ var Contact = React.createClass({
     render: function() {
         return (
                 React.createElement('div', {className: 'row contact'},
-                        React.createElement('div', {className: 'col-sm-offset-4 col-sm-8'},
+                        React.createElement('div', {className: 'col-sm-offset-4 col-sm-8 head'},
                                 React.createElement('h1', null, this.state.headerText)
                                 ),
                         React.createElement('form', {onSubmit: this.onSubmitHandler, className: 'form-horizontal'},
