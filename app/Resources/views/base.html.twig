@@ -92,6 +92,9 @@
                         <li{% if app.request.attributes.get('_route') starts with 'contact' %} class="active"{% endif %}>
                             <a href="{{ path('contact') }}">Kontakt</a>
                         </li>
+                        <li{% if app.request.attributes.get('_route') starts with 'sitemap' %} class="active"{% endif %}>
+                            <a href="{{ path('sitemap') }}">Mapa strony</a>
+                        </li>
                     </ul>
                 </div>
             </div>

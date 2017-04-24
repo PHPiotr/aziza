@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ parent() }} - Sitemap
+{% endblock %}
+
+{% block body %}
+    {% include 'carousel.html.twig' %}
+    <div class="row default">
+        <h1>Mapa <span> strony</span></h1>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{ url('default') }}" title="Willa Aziza - strona główna">Willa Aziza - strona główna</a></li>
+            <li class="list-group-item"><a href="{{ url('offer') }}" title="Oferta">Oferta</a></li>
+            <li class="list-group-item"><a href="{{ url('localization') }}" title="Lokalizacja">Lokalizacja</a></li>
+            <li class="list-group-item"><a href="{{ url('attractions') }}" title="Atrakcje">Atrakcje</a></li>
+            <li class="list-group-item"><a href="{{ url('gallery') }}" title="Galeria">Galeria</a></li>
+            <li class="list-group-item"><a href="{{ url('gallery', {'slug': 'pokoj-niebieski'}) }}" title="Galeria - Pokój niebieski">Galeria - pokój niebieski</a></li>
+            <li class="list-group-item"><a href="{{ url('gallery', {'slug': 'pokoj-zielony'}) }}" title="Galeria - Pokój zielony">Galeria - pokój zielony</a></li>
+            <li class="list-group-item"><a href="{{ url('gallery', {'slug': 'pokoj-karmelowy'}) }}" title="Galeria - Pokój karmelowy">Galeria - pokój karmelowy</a></li>
+            <li class="list-group-item"><a href="{{ url('gallery', {'slug': 'pokoj-pomaranczowy'}) }}" title="Galeria - Pokój pomarańczowy">Galeria - pokój pomarańczowy</a></li>
+            <li class="list-group-item"><a href="{{ url('gallery', {'slug': 'apartament-na-poddaszu'}) }}" title="Galeria - Apartament na poddaszu">Galeria - Apartament na poddaszu</a></li>
+            <li class="list-group-item"><a href="{{ url('gallery', {'slug': 'willa-aziza'}) }}" title="Galeria - Willa Aziza">Galeria - Willa Aziza</a></li>
+            <li class="list-group-item"><a href="{{ url('contact') }}" title="Kontakt">Kontakt</a></li>
+        </ul>
+    </div>
+{% endblock %}
