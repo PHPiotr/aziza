@@ -1,0 +1,24 @@
+{% extends 'auth_base.html.twig' %}
+{% block title %}{{ parent() }} - Galeria - Edytuj - {{ gallery.title }}{% endblock %}
+{% block body %}
+    <h1>Edytuj galerię: {{ gallery.title }}</h1>
+    <div class="well">
+        <ul class="nav nav-pills">
+            <li role="presentation">
+                <a href="{{ path('admin_gallery_photos', {'id': gallery.id}) }}">Zarządzaj zdjęciami tej galerii</a>
+            </li>
+        </ul>
+    </div>
+    {{ form(form, {'attr': {'class': 'form-horizontal', 'action': path('admin_gallery_edit', {'id': gallery.id}), 'novalidate': 'novalidate'}}) }}
+    {% if (mainPhoto) %}
+        <img src="{{ asset('bundles/app/img/gallery/thumbnails/'~mainPhoto) }}"
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {% javascripts
+    '@AppBundle/Resources/public/js/jquery.js'
+    '@AppBundle/Resources/public/js/bootstrap.js'
+    '@AppBundle/Resources/public/js/admin_gallery.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

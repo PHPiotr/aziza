@@ -1,0 +1,49 @@
+{% extends 'auth_base.html.twig' %}
+{% block title %}{{ parent() }} - {{ gallery.title }} - zdjęcia{% endblock %}
+{% block body %}
+    <div class="stock">
+        <div class="row">
+            <h1>{{ gallery.title }}: edytuj zdjęcia</h1>
+            <div class="well">
+                <ul class="nav nav-pills">
+                    <li role="presentation">
+                        <a href="{{ path('admin_gallery_edit', {'id': gallery.id}) }}">Powrót do edycji galerii</a>
+                    </li>
+                </ul>
+            </div>
+            {% for photo in gallery.getGalleryPhotos() %}
+                {% if loop.first %}
+                    {{ form_start(form) }}
+                {% endif %}
+                <div class="form-group">
+                    <img src="{{ asset('bundles/app/img/gallery/thumbnails/'~photo.name) }}"
+                         alt="{{ gallery.title ~ ' ' ~ photo.name }}"/>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="photo[]" value="{{ photo.id }}"/>
+                            Zaznacz do usunięcia: {{ photo.name }}
+                        </label>
+                    </div>
+                    {% if (photo.id != gallery.mainPhotoId) %}
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="main" value="{{ photo.id }}"/>
+                                Ustaw jako zdjęcie główne galerii
+                            </label>
+                        </div>
+                    {% else %}
+                        <p class="badge">Zdjęcie główne</p>
+                    {% endif %}
+                </div>
+                {% if loop.last %}
+                    <div class="form-group">
+                        <button type="submit" class="btn-default btn">Zapisz zmiany</button>
+                    </div>
+                    {{ form_end(form) }}
+                {% endif %}
+            {% else %}
+                <h3>Brak zdjęć w galerii - {{ gallery.title }}</h3>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

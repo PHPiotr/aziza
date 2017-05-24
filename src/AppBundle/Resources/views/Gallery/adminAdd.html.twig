@@ -1,0 +1,13 @@
+{% extends 'auth_base.html.twig' %}
+{% block title %}{{ parent() }} - Galeria - Dodaj{% endblock %}
+{% block body %}
+    {{ form(form, {'attr': {'action': path('admin_gallery_add'), 'novalidate': 'novalidate'}}) }}
+{% endblock %}
+{% block javascripts %}
+    {% javascripts
+    '@AppBundle/Resources/public/js/jquery.js'
+    '@AppBundle/Resources/public/js/bootstrap.js'
+    '@AppBundle/Resources/public/js/admin_gallery.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

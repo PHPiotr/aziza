@@ -4,6 +4,15 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.utils.thumbnail:
+        class:        AppBundle\Utils\Thumbnail
+        arguments: ['@liip_imagine.data.manager', '@liip_imagine.filter.manager']
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+    app.form.type.gallery:
+        class: AppBundle\Form\Type\GalleryType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }

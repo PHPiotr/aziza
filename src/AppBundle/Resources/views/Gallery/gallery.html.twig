@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - {{ name_first~' '~name_last }} {% endblock %}
-{% block description %}{{ name_first~' '~name_last }} - galeria fotografii{% endblock %}
+{% block title %}{{ parent() }} - {{ gallery.title }} {% endblock %}
+{% block description %}{{ gallery.title }} - galeria fotografii{% endblock %}
 {% block stylesheets %}
     {% stylesheets 
         'css/bootstrap.min.css'
@@ -14,12 +14,12 @@
 {% endblock %}
 {% block body %}
     <div class="row gallery">
-        <h1>{{ name_first }} <span>{{ name_last }}</span></h1>
-        {% for key, image in images %}
+        <h1>{{ gallery.getTitleFirst() }} <span>{{ gallery.getTitleRest() }}</span></h1>
+        {% for image in gallery.getGalleryPhotos() %}
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <a data-lightbox="{{ slug }}" href="{{ asset('img/galerie/'~ slug ~'/'~ image) }}">
-                        <img src="{{ asset('img/galerie/'~ slug ~'/thumbnail/'~ image) }}" alt="{{ image }}">
+                    <a data-lightbox="{{ gallery.slug }}" href="{{ asset('bundles/app/img/gallery/'~image.name) }}">
+                        <img src="{{ asset('bundles/app/img/gallery/thumbnails/'~image.name) }}" alt="{{ image.name }}">
                     </a>
                 </div>
             </div>

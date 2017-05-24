@@ -38,6 +38,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - bootstrap_3_horizontal_layout.html.twig
 
 # Doctrine Configuration
 doctrine:
@@ -74,3 +76,19 @@ assetic:
     use_controller: '%kernel.debug%'
     filters:
         cssrewrite: ~
+
+liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                bundle_resources:
+                    enabled: true
+    resolvers:
+        default:
+            web_path: ~
+
+    filter_sets:
+        medium_thumb_out:
+            quality: 50
+            filters:
+                thumbnail: { size: [320, 320] }

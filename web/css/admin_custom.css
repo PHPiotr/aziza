@@ -1,0 +1,23 @@
+.vertical-center {
+	min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+	min-height: 100vh; /* These two lines are counted as one :-)       */
+
+	display: flex;
+	align-items: center;
+}
+
+.vertical-center:before { /* create a full-height inline block pseudo=element */
+	content: " ";
+	display: inline-block;
+	vertical-align: middle; /* vertical alignment of the inline element */
+	height: 100%;
+}
+
+.vertical-center > .container {
+	max-width: 100%;
+
+	display: inline-block;
+	vertical-align: middle; /* vertical alignment of the inline element */
+	/* reset the font property */
+	font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
