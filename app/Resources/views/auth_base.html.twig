@@ -33,11 +33,21 @@
                     <ul class="nav navbar-nav navbar-left">
                         <li class="dropdown{% if app.request.attributes.get('_route') starts with 'admin_gallery' %} active{% endif %}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">Zarządzaj pokojami: <span class="caret"></span></a>
+                               aria-haspopup="true" aria-expanded="false">Pokoje <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 {% for gallery in galleries %}
                                 <li><a href="{{ path('admin_gallery_edit', {id: gallery.id}) }}">{{ gallery.title }}</a></li>
                                 {% endfor %}
+                            </ul>
+                        </li>
+                        <li class="dropdown{% if app.request.attributes.get('_route') starts with 'admin_rest' %} active{% endif %}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Reszta <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('admin_rest_bg') }}">Tło</a></li>
+                                <li><a href="#">Slider</a></li>
+                                <li><a href="#">Zdjęcia u dołu strony głównej</a></li>
+                                <li><a href="#">Zdjęcia u dołu strony kontaktu</a></li>
                             </ul>
                         </li>
                     </ul>
