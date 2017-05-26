@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="gallery_photos")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\GalleryPhotoRepository")
+ * @ORM\Table(name="section_photos")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SectionPhotoRepository")
  */
-class GalleryPhoto
+class SectionPhoto
 {
 
     /**
@@ -25,10 +25,10 @@ class GalleryPhoto
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Gallery", inversedBy="galleryPhotos")
-     * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Section", inversedBy="sectionPhotos")
+     * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
      */
-    private $gallery;
+    private $section;
 
     /**
      * Get id
@@ -45,7 +45,7 @@ class GalleryPhoto
      *
      * @param string $name
      *
-     * @return GalleryPhoto
+     * @return SectionPhoto
      */
     public function setName($name)
     {
@@ -65,26 +65,26 @@ class GalleryPhoto
     }
 
     /**
-     * Set gallery
+     * Set section
      *
-     * @param \AppBundle\Entity\Gallery $gallery
+     * @param \AppBundle\Entity\Section $section
      *
-     * @return GalleryPhoto
+     * @return SectionPhoto
      */
-    public function setGallery(\AppBundle\Entity\Gallery $gallery = null)
+    public function setSection(\AppBundle\Entity\Section $section = null)
     {
-        $this->gallery = $gallery;
+        $this->section = $section;
 
         return $this;
     }
 
     /**
-     * Get gallery
+     * Get section
      *
-     * @return \AppBundle\Entity\Gallery
+     * @return \AppBundle\Entity\Section
      */
-    public function getGallery()
+    public function getSection()
     {
-        return $this->gallery;
+        return $this->section;
     }
 }

@@ -7,20 +7,20 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use AppBundle\Entity\Gallery;
+use AppBundle\Entity\Section;
 
-class GalleryType extends AbstractType
+class SectionType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, ['label' => 'Tytuł galerii'])
-            ->add('galleryPhotos', FileType::class, array(
+            ->add('title', null, ['label' => 'Tytuł sekcji'])
+            ->add('sectionPhotos', FileType::class, array(
                 'multiple' => true,
                 'data_class' => null,
                 'mapped' => false,
-                'label' => 'Dodaj zdjęcia do galerii'
+                'label' => 'Dodaj zdjęcia do sekcji'
             ))
             ->add('edytuj', SubmitType::class);
     }
@@ -28,7 +28,7 @@ class GalleryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Gallery::class,
+            'data_class' => Section::class,
         ));
     }
 

@@ -1,0 +1,5 @@
+{% extends 'auth_base.html.twig' %}
+{% block title %}{{ parent() }} - Sekcja - Usuń - {{ section.title }}{% endblock %}
+{%  block body %}
+    {{ form(form, {'attr': {'action': path('admin_section_delete', {'id': section.id}), 'novalidate': 'novalidate'}}) }}
+{% endblock %}

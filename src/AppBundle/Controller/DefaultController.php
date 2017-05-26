@@ -19,13 +19,4 @@ class DefaultController extends Controller
         return [];
     }
 
-    /**
-     * @Route("/admin/zdjecie_w_tle", name="admin_rest_bg")
-     * @Template()
-     */
-    public function adminBackgroundAction()
-    {
-
-    }
-
 }

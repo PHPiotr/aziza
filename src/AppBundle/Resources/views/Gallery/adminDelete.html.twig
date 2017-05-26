@@ -1,5 +1,5 @@
 {% extends 'auth_base.html.twig' %}
-{% block title %}{{ parent() }} - Galeria - Usuń - {{ car.title }}{% endblock %}
+{% block title %}{{ parent() }} - Galeria - Usuń - {{ gallery.title }}{% endblock %}
 {%  block body %}
     {{ form(form, {'attr': {'action': path('admin_gallery_delete', {'id': gallery.id}), 'novalidate': 'novalidate'}}) }}
 {% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'auth_base.html.twig' %}
+{% block title %}{{ parent() }} - Sekcja - Lista{% endblock %}
+{% block body %}
+    <div class="stock">
+        <div>
+            {% include 'pagination.html.twig' with {path: 'admin_section_list', 'pagesCount': pagesCount, 'currentPage': currentPage} %}
+        </div>
+        <div class="row">
+            {% for section in galleries %}
+                <div class="col-sm-4 col-md-4">
+                    <div class="thumbnail">
+                        {% set break = false %}
+                        {% for photo in section.getGalleryPhotos() if not break %}
+                            <img src="{{ asset('bundles/app/img/section/thumbnails/'~section.name) }}"
+                                 alt="{{ section.title ~ ' ' ~ photo.name }}"/>
+                            {% set break = true %}
+                        {% endfor %}
+                        <div class="caption">
+                            <h2>{{ section.title | truncate(10, true) }}</h2>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4">
+                                    <a class="btn btn-primary btn-block"
+                                       href="{{ path('admin_section_edit', {'id': section.id}) }}">Edytuj</a>
+                                </div>
+                                <div class="col-sm-4 col-md-4">
+                                    <a class="btn btn-success btn-block"
+                                       href="{{ path('admin_section_photos', {'id': section.id}) }}">Zdjęcia</a>
+                                </div>
+                                <div class="col-sm-4 col-md-4">
+                                    <a class="btn btn-danger btn-block"
+                                       href="{{ path('admin_section_delete', {'id': section.id}) }}">Usuń</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <h1>Brak sekcji</h1>
+            {% endfor %}
+        </div>
+        <div>
+            {% include 'pagination.html.twig' with {path: 'admin_section_list', 'pagesCount': pagesCount, 'currentPage': currentPage} %}
+        </div>
+    </div>
+{% endblock %}

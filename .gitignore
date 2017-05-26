@@ -18,3 +18,4 @@
 *.DS_Store
 /nbproject/
 src/AppBundle/Resources/public/img/gallery/
+src/AppBundle/Resources/public/img/bg/

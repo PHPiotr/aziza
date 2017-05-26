@@ -1,0 +1,49 @@
+{% extends 'auth_base.html.twig' %}
+{% block title %}{{ parent() }} - {{ section.title }} - zdjęcia{% endblock %}
+{% block body %}
+    <div class="stock">
+        <div class="row">
+            <h1>{{ section.title }}: edytuj zdjęcia</h1>
+            <div class="well">
+                <ul class="nav nav-pills">
+                    <li role="presentation">
+                        <a href="{{ path('admin_section_edit', {'id': section.id}) }}">Powrót do edycji sekcji</a>
+                    </li>
+                </ul>
+            </div>
+            {% for photo in section.getSectionPhotos() %}
+                {% if loop.first %}
+                    {{ form_start(form) }}
+                {% endif %}
+                <div class="form-group">
+                    <img src="{{ asset('bundles/app/img/section/thumbnails/'~photo.name) }}"
+                         alt="{{ section.title ~ ' ' ~ photo.name }}"/>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="photo[]" value="{{ photo.id }}"/>
+                            Zaznacz do usunięcia: {{ photo.name }}
+                        </label>
+                    </div>
+                    {% if (photo.id != section.mainPhotoId) %}
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="main" value="{{ photo.id }}"/>
+                                Ustaw jako zdjęcie główne sekcji
+                            </label>
+                        </div>
+                    {% else %}
+                        <p class="badge">Zdjęcie główne</p>
+                    {% endif %}
+                </div>
+                {% if loop.last %}
+                    <div class="form-group">
+                        <button type="submit" class="btn-default btn">Zapisz zmiany</button>
+                    </div>
+                    {{ form_end(form) }}
+                {% endif %}
+            {% else %}
+                <h3>Brak zdjęć w sekcji - {{ section.title }}</h3>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'auth_base.html.twig' %}
+{% block title %}{{ parent() }} - Sekcja - Edytuj - {{ section.title }}{% endblock %}
+{% block body %}
+    <h1>Edytuj sekcję: {{ section.title }}</h1>
+    <div class="well">
+        <ul class="nav nav-pills">
+            <li role="presentation">
+                <a href="{{ path('admin_section_photos', {'id': section.id}) }}">Zarządzaj zdjęciami tej sekcji</a>
+            </li>
+        </ul>
+    </div>
+    {{ form(form, {'attr': {'class': 'form-horizontal', 'action': path('admin_section_edit', {'id': section.id}), 'novalidate': 'novalidate'}}) }}
+    {% if (mainPhoto) %}
+        <img src="{{ asset('bundles/app/img/section/thumbnails/'~mainPhoto) }}" />
+    {% endif %}
+{% endblock %}

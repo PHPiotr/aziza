@@ -17,16 +17,25 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        if (!$this->isGranted('ROLE_USER')) {
-            return $this->createNotFoundException();
-        }
+        $this->denyAccessUnlessGranted('ROLE_USER', null);
 
-        return ['galleries' => $this->getGalleries()];
+        return [
+            'galleries' => $this->getGalleries(),
+            'sections' => $this->getSections(),
+        ];
     }
 
     protected function getGalleries()
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Gallery');
+        $galleries = $repo->findBy([], ['title' => 'ASC']);
+
+        return $galleries;
+    }
+
+    protected function getSections()
+    {
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Section');
         $galleries = $repo->findBy([], ['title' => 'ASC']);
 
         return $galleries;

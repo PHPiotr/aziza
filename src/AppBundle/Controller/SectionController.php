@@ -8,23 +8,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Exception\IOException;
-use AppBundle\Form\GalleryType;
-use AppBundle\Form\GalleryDeleteType;
-use AppBundle\Entity\Gallery;
-use AppBundle\Entity\GalleryPhoto;
+use AppBundle\Form\SectionType;
+use AppBundle\Form\SectionDeleteType;
+use AppBundle\Entity\Section;
+use AppBundle\Entity\SectionPhoto;
 use Symfony\Component\Filesystem\Filesystem;
 use Gedmo\Sluggable\Util as Sluggable;
 
-class GalleryController extends Controller
+class SectionController extends Controller
 {
 
-    private $galleryPhotosDirectory = 'bundles/app/img/gallery/';
+    private $sectionPhotosDirectory = 'bundles/app/img/section/';
     private $perPage = 10;
 
     protected function getListData($page = 1)
     {
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Gallery');
-        $galleries = $repo->findBy([], ['title' => 'ASC'], $this->perPage, $this->perPage * ($page - 1));
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Section');
+        $sections = $repo->findBy([], ['title' => 'ASC'], $this->perPage, $this->perPage * ($page - 1));
         $countAll = $repo->getCountAll();
         $pagesCount = $countAll > 0 ? ceil($countAll / $this->perPage) : 1;
 
@@ -32,11 +32,11 @@ class GalleryController extends Controller
             $page = $pagesCount;
         }
 
-        return ['galleries' => $galleries, 'currentPage' => $page, 'pagesCount' => $pagesCount];
+        return ['sections' => $sections, 'currentPage' => $page, 'pagesCount' => $pagesCount];
     }
 
     /**
-     * @Route("/admin/galeria/{page}", name="admin_gallery_list", requirements={"page": "\d+"}, defaults={"page" = 1}))
+     * @Route("/admin/sekcja/{page}", name="admin_section_list", requirements={"page": "\d+"}, defaults={"page" = 1}))
      * @Template()
      */
     public function adminListAction($page)
@@ -47,47 +47,47 @@ class GalleryController extends Controller
     }
 
     /**
-     * @Route("/admin/galeria/edycja/{id}", name="admin_gallery_edit", requirements={"id": "\d+"}))
+     * @Route("/admin/sekcja/edycja/{id}", name="admin_section_edit", requirements={"id": "\d+"}))
      * @Template()
      */
     public function adminEditAction(Request $request, $id)
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null);
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Gallery');
-        $gallery = $repo->findOneById($id);
-        if (null === $gallery) {
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Section');
+        $section = $repo->findOneById($id);
+        if (null === $section) {
             throw $this->createNotFoundException('Nie ma takiego pokoju.');
         }
-        $photo = $this->getDoctrine()->getRepository('AppBundle:GalleryPhoto')->findOneById($gallery->getMainPhotoId());
+        $photo = $this->getDoctrine()->getRepository('AppBundle:SectionPhoto')->findOneById($section->getMainPhotoId());
         $mainPhoto = null !== $photo ? $photo->getName() : null;
 
-        $form = $this->createForm(GalleryType::class, $gallery);
+        $form = $this->createForm(SectionType::class, $section);
         $form->handleRequest($request);
 
         if (!$form->isSubmitted()) {
-            return ['mainPhoto' => $mainPhoto, 'galleries' => $this->getGalleries(), 'sections' => $this->getSections(), 'gallery' => $gallery, 'form' => $form->createView()];
+            return ['mainPhoto' => $mainPhoto, 'sections' => $this->getSections(), 'galleries' => $this->getGalleries(), 'section' => $section, 'form' => $form->createView()];
         }
 
         if (!$form->isValid()) {
             foreach ($form->getErrors() as $error) {
                 $this->addFlash('danger', $error->getMessage());
             }
-            return ['mainPhoto' => $mainPhoto, 'galleries' => $this->getGalleries(), 'sections' => $this->getSections(), 'gallery' => $gallery, 'form' => $form->createView()];
+            return ['mainPhoto' => $mainPhoto, 'sections' => $this->getSections(), 'galleries' => $this->getGalleries(), 'section' => $section, 'form' => $form->createView()];
         }
 
         try {
-            if (true !== $this->addGalleryPhotosIfNeeded($request, $gallery, new Filesystem())) {
+            if (true !== $this->addSectionPhotosIfNeeded($request, $section, new Filesystem())) {
                 throw new \Exception('Nie powiodło się dodanie pliku');
             }
-            $title = $gallery->getTitle();
+            $title = $section->getTitle();
             $slug = Sluggable\Urlizer::urlize($title);
-            $sameSlugGallery = $repo->findOneBy(['slug' => $slug]);
+            $sameSlugSection = $repo->findOneBy(['slug' => $slug]);
 
             if (null === $repo->findOneBy(['slug' => $slug])) {
-                $gallery->setSlug(Sluggable\Urlizer::urlize($title));
-            } else if ($sameSlugGallery->getId() !== $gallery->getId()) {
+                $section->setSlug(Sluggable\Urlizer::urlize($title));
+            } else if ($sameSlugSection->getId() !== $section->getId()) {
                 $availableSlug = $this->getAvailableSlugForTitle($title);
-                $gallery->setSlug($availableSlug);
+                $section->setSlug($availableSlug);
             }
 
             $em = $this->getDoctrine()->getManager();
@@ -95,58 +95,58 @@ class GalleryController extends Controller
             $this->addFlash('success', 'Pokój został zmodyfikowany');
         } catch (\Exception $e) {
             $this->addFlash('danger', $e->getMessage());
-            return ['mainPhoto' => $mainPhoto, 'galleries' => $this->getGalleries(), 'sections' => $this->getSections(), 'gallery' => $gallery, 'form' => $form->createView()];
+            return ['mainPhoto' => $mainPhoto, 'sections' => $this->getSections(), 'galleries' => $this->getGalleries(), 'section' => $section, 'form' => $form->createView()];
         }
 
-        return $this->redirectToRoute('admin_gallery_edit', ['id' => $gallery->getId()]);
+        return $this->redirectToRoute('admin_section_edit', ['id' => $section->getId()]);
     }
 
     /**
-     * @Route("/admin/galeria/usuwanie/{id}", name="admin_gallery_delete", requirements={"id": "\d+"}))
+     * @Route("/admin/sekcja/usuwanie/{id}", name="admin_section_delete", requirements={"id": "\d+"}))
      * @Template()
      */
     public function adminDeleteAction(Request $request, $id)
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null);
-        $gallery = $this->getDoctrine()->getRepository('AppBundle:Gallery')->findOneById($id);
-        if (null === $gallery) {
+        $section = $this->getDoctrine()->getRepository('AppBundle:Section')->findOneById($id);
+        if (null === $section) {
             throw $this->createNotFoundException('Nie ma takiego pokoju');
         }
 
-        $form = $this->createForm(GalleryDeleteType::class);
+        $form = $this->createForm(SectionDeleteType::class);
         $form->handleRequest($request);
 
         if (!$form->isSubmitted()) {
-            return ['gallery' => $gallery, 'form' => $form->createView()];
+            return ['section' => $section, 'form' => $form->createView()];
         }
 
         if (!$form->isValid()) {
             foreach ($form->getErrors() as $error) {
                 $this->addFlash('danger', $error->getMessage());
             }
-            return ['gallery' => $gallery, 'form' => $form->createView()];
+            return ['section' => $section, 'form' => $form->createView()];
         }
 
-        $this->deleteGalleryPhotosIfNeeded($gallery);
+        $this->deleteSectionPhotosIfNeeded($section);
 
         $em = $this->getDoctrine()->getManager();
-        $em->remove($gallery);
+        $em->remove($section);
         $em->flush();
         $this->addFlash('success', 'Pokój został usunięty');
 
-        return $this->redirectToRoute('admin_gallery_list');
+        return $this->redirectToRoute('admin_section_list');
     }
 
     /**
-     * @Route("/admin/galeria/dodawanie", name="admin_gallery_add")
+     * @Route("/admin/sekcja/dodawanie", name="admin_section_add")
      * @Template()
      */
     public function adminAddAction(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null);
 
-        $gallery = new Gallery();
-        $form = $this->createForm(GalleryType::class, $gallery);
+        $section = new Section();
+        $form = $this->createForm(SectionType::class, $section);
         $form->handleRequest($request);
 
         if (!$form->isSubmitted()) {
@@ -160,21 +160,21 @@ class GalleryController extends Controller
             return ['form' => $form->createView()];
         }
 
-        $title = $gallery->getTitle();
+        $title = $section->getTitle();
         $slug = Sluggable\Urlizer::urlize($title);
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Gallery');
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Section');
         if (null === $repo->findOneBy(['slug' => $slug])) {
-            $gallery->setSlug(Sluggable\Urlizer::urlize($title));
+            $section->setSlug(Sluggable\Urlizer::urlize($title));
         } else {
             $availableSlug = $this->getAvailableSlugForTitle($title);
-            $gallery->setSlug($availableSlug);
+            $section->setSlug($availableSlug);
         }
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($gallery);
+        $em->persist($section);
 
         try {
-            if (true !== $this->addGalleryPhotosIfNeeded($request, $gallery, new Filesystem())) {
+            if (true !== $this->addSectionPhotosIfNeeded($request, $section, new Filesystem())) {
                 throw new \Exception('Nie powiodło się dodawanie pliku');
             }
         } catch (\Exception $e) {
@@ -183,103 +183,103 @@ class GalleryController extends Controller
         $em->flush();
         $this->addFlash('success', 'Pokój został dodany');
 
-        return $this->redirectToRoute('admin_gallery_list');
+        return $this->redirectToRoute('admin_section_list');
     }
 
     /**
-     * @Route("/admin/galeria/fotografie/{id}", name="admin_gallery_photos", requirements={"id": "\d+"})
+     * @Route("/admin/sekcja/fotografie/{id}", name="admin_section_photos", requirements={"id": "\d+"})
      * @Template()
      */
     public function adminListPhotos(Request $request, $id)
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null);
-        $gallery = $this->getDoctrine()->getRepository('AppBundle:Gallery')->findOneById($id);
+        $section = $this->getDoctrine()->getRepository('AppBundle:Section')->findOneById($id);
 
-        $form = $this->createFormBuilder($gallery)->getForm();
+        $form = $this->createFormBuilder($section)->getForm();
 
         $form->handleRequest($request);
 
         if (!$form->isSubmitted()) {
-            return ['galleries' => $this->getGalleries(), 'sections' => $this->getSections(), 'gallery' => $gallery, 'form' => $form->createView()];
+            return ['sections' => $this->getSections(), 'galleries' => $this->getGalleries(), 'section' => $section, 'form' => $form->createView()];
         }
 
         if (!$form->isValid()) {
             foreach ($form->getErrors() as $error) {
                 $this->addFlash('danger', $error->getMessage());
             }
-            return ['galleries' => $this->getGalleries(), 'sections' => $this->getSections(), 'gallery' => $gallery, 'form' => $form->createView()];
+            return ['sections' => $this->getSections(), 'galleries' => $this->getGalleries(), 'section' => $section, 'form' => $form->createView()];
         }
 
         if (empty($request->request->get('main'))) {
             if (empty($request->request->get('photo'))) {
                 $this->addFlash('warning', 'Nie zaznaczono fotografii do usunięcia');
-                return ['galleries' => $this->getGalleries(), 'sections' => $this->getSections(), 'gallery' => $gallery, 'form' => $form->createView()];
+                return ['sections' => $this->getSections(), 'galleries' => $this->getGalleries(), 'section' => $section, 'form' => $form->createView()];
             }
         }
 
         if (!empty($request->request->get('photo'))) {
-            $this->deleteGalleryPhotosIfNeeded($gallery, $request->request->get('photo'));
+            $this->deleteSectionPhotosIfNeeded($section, $request->request->get('photo'));
             $this->addFlash('success', 'Zdjęcia pokoju usunięte');
         }
 
 
-        $repo = $this->getDoctrine()->getRepository('AppBundle:GalleryPhoto');
+        $repo = $this->getDoctrine()->getRepository('AppBundle:SectionPhoto');
         $photo = $repo->findOneById($request->request->get('main'));
         $em = $this->getDoctrine()->getManager();
         if (null !== $photo) {
-            $gallery->setMainPhotoId($photo->getId());
-            $em->persist($gallery);
+            $section->setMainPhotoId($photo->getId());
+            $em->persist($section);
             $em->flush();
             $this->addFlash('success', 'Zdjęcie główne zostało ustawione');
         } else {
-            if ($gallery->getMainPhotoId()) {
-                $photo = $repo->findOneById($gallery->getMainPhotoId());
+            if ($section->getMainPhotoId()) {
+                $photo = $repo->findOneById($section->getMainPhotoId());
                 if (null == $photo) {
-                    $gallery->setMainPhotoId(null);
+                    $section->setMainPhotoId(null);
                     $em->flush();
                     $this->addFlash('warning', 'Zdjęcie główne zostało usunięte');
                 }
             }
         }
 
-        return $this->redirectToRoute('admin_gallery_photos', ['id' => $gallery->getId(), 'request' => $request,]);
+        return $this->redirectToRoute('admin_section_photos', ['id' => $section->getId(), 'request' => $request,]);
     }
 
-    protected function addGalleryPhotosIfNeeded(Request $request, Gallery $gallery, Filesystem $fs)
+    protected function addSectionPhotosIfNeeded(Request $request, Section $section, Filesystem $fs)
     {
         $files = $request->files->all();
 
-        if (!isset($files['gallery']['galleryPhotos'])) {
+        if (!isset($files['section']['sectionPhotos'])) {
             return true;
         }
-        $galleryPhotos = $files['gallery']['galleryPhotos'];
-        if ($galleryPhotos[0] === null) {
+        $sectionPhotos = $files['section']['sectionPhotos'];
+        if ($sectionPhotos[0] === null) {
             return true;
         }
-        $galleryPhotosDirectory = $this->galleryPhotosDirectory;
+        $sectionPhotosDirectory = $this->sectionPhotosDirectory;
 
         $em = $this->getDoctrine()->getManager();
         $imgAdded = $thumbAdded = [];
         $error = null;
 
-        foreach ($galleryPhotos as $uploadedFile) {
-            $galleryPhoto = new GalleryPhoto();
+        foreach ($sectionPhotos as $uploadedFile) {
+            $sectionPhoto = new SectionPhoto();
             $clientOriginalName = $uploadedFile->getClientOriginalName();
             $extension = pathinfo($clientOriginalName, PATHINFO_EXTENSION);
-            $sluggedFilename = sprintf('%s-%s', Sluggable\Urlizer::urlize($gallery->getTitle()), md5(time() . rand(0, 1000)));
+            $sluggedFilename = sprintf('%s-%s', Sluggable\Urlizer::urlize($section->getTitle()), md5(time() . rand(0, 1000)));
             $sluggedName = strtolower(sprintf('%s.%s', $sluggedFilename, $extension));
 
-            $galleryPhoto->setGallery($gallery);
-            $galleryPhoto->setName($sluggedName);
-            $em->persist($galleryPhoto);
+            $sectionPhoto->setSection($section);
+            $sectionPhoto->setName($sluggedName);
+            $em->persist($sectionPhoto);
 
-            $original = $galleryPhotosDirectory . $sluggedName;
-            $thumbnailMedium = $galleryPhotosDirectory . 'thumbnails/' . $sluggedName;
+            $original = $sectionPhotosDirectory . $sluggedName;
+            $thumbnailMedium = $sectionPhotosDirectory . 'thumbnails/' . $sluggedName;
 
             try {
-                $uploadedFile->move($galleryPhotosDirectory, $sluggedName);
+                $uploadedFile->move($sectionPhotosDirectory, $sluggedName);
                 $imgAdded[] = $original;
-                $fs->copy($galleryPhotosDirectory . $sluggedName, $thumbnailMedium);
+                $fs->copy($sectionPhotosDirectory . $sluggedName, $thumbnailMedium);
                 $imgAdded[] = $thumbnailMedium;
                 $thumbAdded[] = $thumbnailMedium;
             } catch (\Exception $e) {
@@ -309,29 +309,29 @@ class GalleryController extends Controller
         return false;
     }
 
-    protected function deleteGalleryPhotosIfNeeded(Gallery $gallery, array $selectedPhotos = [])
+    protected function deleteSectionPhotosIfNeeded(Section $section, array $selectedPhotos = [])
     {
-        $photos = $gallery->getGalleryPhotos();
+        $photos = $section->getSectionPhotos();
 
         if (!$photos) {
             return;
         }
 
         $fs = new Filesystem();
-        $galleryPhotosDirectory = $this->galleryPhotosDirectory;
+        $sectionPhotosDirectory = $this->sectionPhotosDirectory;
         $imgRemove = [];
 
         $em = $this->getDoctrine()->getManager();
-        foreach ($photos as $galleryPhoto) {
+        foreach ($photos as $sectionPhoto) {
             if (!empty($selectedPhotos)) {
-                if (!in_array($galleryPhoto->getId(), $selectedPhotos)) {
+                if (!in_array($sectionPhoto->getId(), $selectedPhotos)) {
                     continue;
                 }
             }
-            $name = $galleryPhoto->getName();
-            $em->remove($galleryPhoto);
-            $original = $galleryPhotosDirectory . $name;
-            $thumbnailMedium = $galleryPhotosDirectory . 'thumbnails/' . $name;
+            $name = $sectionPhoto->getName();
+            $em->remove($sectionPhoto);
+            $original = $sectionPhotosDirectory . $name;
+            $thumbnailMedium = $sectionPhotosDirectory . 'thumbnails/' . $name;
             $imgRemove[] = $original;
             $imgRemove[] = $thumbnailMedium;
         }
@@ -348,42 +348,24 @@ class GalleryController extends Controller
     {
         $suffix = $index > 0 ? sprintf('-%d', $index) : null;
         $slug = Sluggable\Urlizer::urlize($title) . $suffix;
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Gallery');
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Section');
         if (null === $repo->findOneBy(['slug' => $slug])) {
             return $slug;
         }
         return $this->getAvailableSlugForTitle($title, $index + 1);
     }
 
-    /**
-     * @Route("/galeria/{slug}", name="gallery")
-     * @Template()
-     */
-    public function indexAction(Request $request, $slug = null)
+    protected function getSections()
     {
-        if (!$slug) {
-            return $this->getListData();
-        }
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Section');
+        $sections = $repo->findBy([], ['title' => 'ASC']);
 
-        $gallery = $this->getDoctrine()->getRepository('AppBundle:Gallery')->findOneBy(['slug' => $slug]);
-        if (null === $gallery) {
-            throw $this->createNotFoundException('This car is not in stock.');
-        }
-
-        return $this->render('AppBundle:Gallery:gallery.html.twig', ['gallery' => $gallery]);
+        return $sections;
     }
 
     protected function getGalleries()
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Gallery');
-        $galleries = $repo->findBy([], ['title' => 'ASC']);
-
-        return $galleries;
-    }
-
-    protected function getSections()
-    {
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Section');
         $sections = $repo->findBy([], ['title' => 'ASC']);
 
         return $sections;

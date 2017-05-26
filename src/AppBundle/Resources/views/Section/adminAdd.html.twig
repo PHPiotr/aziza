@@ -1,0 +1,5 @@
+{% extends 'auth_base.html.twig' %}
+{% block title %}{{ parent() }} - Sekcja - Dodaj{% endblock %}
+{% block body %}
+    {{ form(form, {'attr': {'action': path('admin_section_add'), 'novalidate': 'novalidate'}}) }}
+{% endblock %}
