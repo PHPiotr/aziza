@@ -16,7 +16,11 @@ class OfferController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return [];
+        $base = new \AppBundle\Utils\Base($this->getDoctrine());
+        return [
+            'backgroundFileName' => $base->getFileFor('tlo'),
+            'carouselPhotos' => $base->getFilesFor('slajder'),
+        ];
     }
 
 }

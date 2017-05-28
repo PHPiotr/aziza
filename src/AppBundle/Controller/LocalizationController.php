@@ -16,7 +16,9 @@ class LocalizationController extends Controller
      */
     public function indexAction(Request $request)
     {
+            $base = new \AppBundle\Utils\Base($this->getDoctrine());
         return [
+            'backgroundFileName' => $base->getFileFor('tlo'),
             'title' => 'Willa Aziza w Kościelisku',
             'content' => 'Kościelisko usytuowane jest na zachód od Zakopanego, '
             . 'składa się z wielu osiedli rozrzuconych na zboczach pasma gubałowskiego. '

@@ -1,31 +1,11 @@
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            {% image '@AppBundle/Resources/public/img/willa_aziza_kulig.jpg' %}
-                <img src="{{ asset_url }}" alt="Willa Aziza i kulig" />
-            {% endimage %}
-        </div>
-        <div class="item">
-            {% image '@AppBundle/Resources/public/img/willa_aziza_okolica.jpg' %}
-                <img src="{{ asset_url }}" alt="Willa Aziza i okolica" />
-            {% endimage %}
-        </div>
-        <div class="item">
-            {% image '@AppBundle/Resources/public/img/willa_aziza_z_zewnatrz.jpg' %}
-                <img src="{{ asset_url }}" alt="Willa Aziza z zewnątrz" />
-            {% endimage %}
-        </div>
-        <div class="item">
-            {% image '@AppBundle/Resources/public/img/willa_aziza_zima.jpg' %}
-                <img src="{{ asset_url }}" alt="Willa Aziza w ciągu dnia zimą" />
-            {% endimage %}
-        </div>
-        <div class="item">
-            {% image '@AppBundle/Resources/public/img/willa_aziza_dzien.jpg' %}
-                <img src="{{ asset_url }}" alt="Willa Aziza w ciągu dnia" />
-            {% endimage %}
-        </div>
+        {% for photo in carouselPhotos %}
+            <div class="item{% if (photo.id == photo.mainPhotoId) %} active{% endif %}">
+                <img src="{{ asset('bundles/app/img/section/'~photo.name) }}" alt="{{ photo.name }}" />
+            </div>
+        {% endfor %}
     </div>
     <!-- Controls -->
     <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">

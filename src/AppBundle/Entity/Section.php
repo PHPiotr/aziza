@@ -39,6 +39,11 @@ class Section
     private $description;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filter;
+
+    /**
      * @ORM\OneToMany(targetEntity="SectionPhoto", mappedBy="section")
      */
     private $sectionPhotos;
@@ -194,5 +199,29 @@ class Section
     public function getSectionPhotos()
     {
         return $this->sectionPhotos;
+    }
+
+    /**
+     * Set filter
+     *
+     * @param string $filter
+     *
+     * @return Section
+     */
+    public function setFilter($filter)
+    {
+        $this->filter = $filter;
+
+        return $this;
+    }
+
+    /**
+     * Get filter
+     *
+     * @return string
+     */
+    public function getFilter()
+    {
+        return $this->filter;
     }
 }

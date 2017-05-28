@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Exception\IOException;
 use AppBundle\Form\SectionType;
 use AppBundle\Form\SectionDeleteType;
@@ -56,7 +55,7 @@ class SectionController extends Controller
         $repo = $this->getDoctrine()->getRepository('AppBundle:Section');
         $section = $repo->findOneById($id);
         if (null === $section) {
-            throw $this->createNotFoundException('Nie ma takiego pokoju.');
+            throw $this->createNotFoundException('Nie ma takiej sekcji.');
         }
         $photo = $this->getDoctrine()->getRepository('AppBundle:SectionPhoto')->findOneById($section->getMainPhotoId());
         $mainPhoto = null !== $photo ? $photo->getName() : null;
@@ -110,7 +109,7 @@ class SectionController extends Controller
         $this->denyAccessUnlessGranted('ROLE_USER', null);
         $section = $this->getDoctrine()->getRepository('AppBundle:Section')->findOneById($id);
         if (null === $section) {
-            throw $this->createNotFoundException('Nie ma takiego pokoju');
+            throw $this->createNotFoundException('Nie ma takiej sekcji');
         }
 
         $form = $this->createForm(SectionDeleteType::class);
@@ -219,7 +218,7 @@ class SectionController extends Controller
 
         if (!empty($request->request->get('photo'))) {
             $this->deleteSectionPhotosIfNeeded($section, $request->request->get('photo'));
-            $this->addFlash('success', 'Zdjęcia pokoju usunięte');
+            $this->addFlash('success', 'Zdjęcia sekcji usunięte');
         }
 
 
@@ -259,7 +258,7 @@ class SectionController extends Controller
         $sectionPhotosDirectory = $this->sectionPhotosDirectory;
 
         $em = $this->getDoctrine()->getManager();
-        $imgAdded = $thumbAdded = [];
+        $imgAdded = [];
         $error = null;
 
         foreach ($sectionPhotos as $uploadedFile) {
@@ -274,30 +273,33 @@ class SectionController extends Controller
             $em->persist($sectionPhoto);
 
             $original = $sectionPhotosDirectory . $sluggedName;
-            $thumbnailMedium = $sectionPhotosDirectory . 'thumbnails/' . $sluggedName;
 
             try {
                 $uploadedFile->move($sectionPhotosDirectory, $sluggedName);
                 $imgAdded[] = $original;
-                $fs->copy($sectionPhotosDirectory . $sluggedName, $thumbnailMedium);
-                $imgAdded[] = $thumbnailMedium;
-                $thumbAdded[] = $thumbnailMedium;
             } catch (\Exception $e) {
                 $error = $e->getMessage();
                 break;
             }
         }
 
+        if (!$section->getFilter()) {
+            $this->addFlash('success', 'Zdjęcia dodane do sekcji');
+            $em->flush();
+
+            return true;
+        }
+
         $memory_limit = ini_get('memory_limit');
         ini_set('memory_limit', -1);
         $thumbnail = $this->get('app.utils.thumbnail');
-        foreach ($thumbAdded as $thumbnailMedium) {
-            $thumbnail->create($thumbnailMedium, 'medium_thumb_out');
+        foreach ($imgAdded as $thumbnailMedium) {
+            $thumbnail->create($thumbnailMedium, $section->getFilter());
         }
         ini_set('memory_limit', $memory_limit);
 
         if (!$error) {
-            $this->addFlash('success', 'Zdjęcia dodane do pokoju');
+            $this->addFlash('success', 'Zdjęcia dodane do sekcji');
             $em->flush();
 
             return true;
@@ -331,9 +333,7 @@ class SectionController extends Controller
             $name = $sectionPhoto->getName();
             $em->remove($sectionPhoto);
             $original = $sectionPhotosDirectory . $name;
-            $thumbnailMedium = $sectionPhotosDirectory . 'thumbnails/' . $name;
             $imgRemove[] = $original;
-            $imgRemove[] = $thumbnailMedium;
         }
 
         try {

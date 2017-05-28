@@ -10,4 +10,49 @@ namespace AppBundle\Repository;
  */
 class SectionPhotoRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return int
+     */
+    public function getAllNamesBySlug($slug)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p.name, p.id, s.mainPhotoId');
+        $qb->innerJoin('p.section', 's');
+        $qb->where('s.slug = :slug');
+        $qb->setParameter('slug', $slug);
+
+        return $qb->getQuery()->getResult();
+
+//        $em = $this->getDoctrine()->getManager();
+//        $query = $em->createQuery(
+//            'SELECT p
+//    FROM AppBundle:Product p
+//    WHERE p.price > :price
+//    ORDER BY p.price ASC'
+//        )->setParameter('price', 19.99);
+//
+//        $products = $query->getResult();
+//
+//        $query = $repository->createQueryBuilder('p')
+//
+//            ->where('p.price > :price')
+//            ->setParameter('price', '19.99')
+//            ->orderBy('p.price', 'ASC')
+//            ->getQuery();
+//
+//        $products = $query->getResult();
+    }
+
+//    function x()
+//    {
+//        $qb->select('c')
+//            ->innerJoin('c.phones', 'p', Join::ON, 'c.id = p.customerId')
+//            ->where('c.username = :username')
+//            ->andWhere('p.phone = :phone');
+//
+//        $qb->setParameters(array(
+//            'username' => $username,
+//            'phone' => $phone->getPhone(),
+//        ));
+//    }
 }

@@ -361,8 +361,9 @@ class GalleryController extends Controller
      */
     public function indexAction(Request $request, $slug = null)
     {
+        $base = new \AppBundle\Utils\Base($this->getDoctrine());
         if (!$slug) {
-            return $this->getListData();
+            return ['backgroundFileName' => $base->getFileFor('tlo')] + $this->getListData();
         }
 
         $gallery = $this->getDoctrine()->getRepository('AppBundle:Gallery')->findOneBy(['slug' => $slug]);
@@ -370,7 +371,8 @@ class GalleryController extends Controller
             throw $this->createNotFoundException('This car is not in stock.');
         }
 
-        return $this->render('AppBundle:Gallery:gallery.html.twig', ['gallery' => $gallery]);
+
+        return $this->render('AppBundle:Gallery:gallery.html.twig', ['backgroundFileName' => $base->getFileFor('tlo'), 'gallery' => $gallery]);
     }
 
     protected function getGalleries()

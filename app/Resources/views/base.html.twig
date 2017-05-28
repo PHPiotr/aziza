@@ -11,6 +11,11 @@
                 'css/custom.css'
                 filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
+            <style>
+                html {
+                    background:  #104f70 url({{ asset('bundles/app/img/section/'~backgroundFileName) }}) no-repeat center center fixed;
+                }
+            </style>
             {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />

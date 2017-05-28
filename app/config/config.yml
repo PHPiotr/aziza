@@ -89,6 +89,18 @@ liip_imagine:
 
     filter_sets:
         medium_thumb_out:
-            quality: 50
+            quality: 100
             filters:
-                thumbnail: { size: [320, 320] }
+                thumbnail: { size: [320, 320], mode: outbound, allow_upscale: true }
+        bigger_thumb_out:
+            quality: 100
+            filters:
+                thumbnail: { size: [500, 400], mode: outbound, allow_upscale: true }
+        large_thumb_out:
+            quality: 100
+            filters:
+                thumbnail: { size: [1920, 1075], mode: outbound, allow_upscale: true }
+        carousel_thumb_out:
+            quality: 100
+            filters:
+                thumbnail: { size: [1140, 400], mode: outbound, allow_upscale: true }

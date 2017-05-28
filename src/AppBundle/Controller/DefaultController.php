@@ -16,7 +16,14 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return [];
+        $base = new \AppBundle\Utils\Base($this->getDoctrine());
+        return [
+            'backgroundFileName' => $base->getFileFor('tlo'),
+            'roomsFileName' => $base->getFileFor('komfortowe-pokoje'),
+            'sorroundingsFileName' => $base->getFileFor('urokliwa-okolica'),
+            'localizationFileName' => $base->getFileFor('dogodna-lokalizacja'),
+            'carouselPhotos' => $base->getFilesFor('slajder'),
+        ];
     }
 
 }

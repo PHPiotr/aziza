@@ -11,7 +11,7 @@
                     <div class="thumbnail">
                         {% set break = false %}
                         {% for photo in section.getGalleryPhotos() if not break %}
-                            <img src="{{ asset('bundles/app/img/section/thumbnails/'~section.name) }}"
+                            <img src="{{ asset('bundles/app/img/section/'~section.name) }}"
                                  alt="{{ section.title ~ ' ' ~ photo.name }}"/>
                             {% set break = true %}
                         {% endfor %}

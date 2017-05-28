@@ -11,6 +11,6 @@
     </div>
     {{ form(form, {'attr': {'class': 'form-horizontal', 'action': path('admin_section_edit', {'id': section.id}), 'novalidate': 'novalidate'}}) }}
     {% if (mainPhoto) %}
-        <img src="{{ asset('bundles/app/img/section/thumbnails/'~mainPhoto) }}" />
+        <img src="{{ asset('bundles/app/img/section/'~mainPhoto) }}" />
     {% endif %}
 {% endblock %}

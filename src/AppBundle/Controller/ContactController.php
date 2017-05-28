@@ -18,7 +18,14 @@ class ContactController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return [];
+        $base = new \AppBundle\Utils\Base($this->getDoctrine());
+        return [
+            'backgroundFileName' => $base->getFileFor('tlo'),
+            'moreFileName' => $base->getFileFor('dowiedz-sie-wiecej'),
+            'wifiFileName' => $base->getFileFor('bezplatne-wi-fi'),
+            'organisationFileName' => $base->getFileFor('organizacja-kuligow'),
+            'zakopaneFileName' => $base->getFileFor('blisko-zakopane'),
+        ];
     }
 
     /**

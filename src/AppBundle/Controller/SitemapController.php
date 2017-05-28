@@ -19,7 +19,8 @@ class SitemapController extends Controller
 	 */
 	public function indexAction()
 	{
-		return [];
+        $base = new \AppBundle\Utils\Base($this->getDoctrine());
+        return ['backgroundFileName' => $base->getFileFor('tlo')];
 	}
 }
 
