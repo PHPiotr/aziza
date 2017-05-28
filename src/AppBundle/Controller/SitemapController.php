@@ -13,14 +13,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 class SitemapController extends Controller
 {
-	/**
-	 * @Route("/mapa-strony.{_format}", name="sitemap", defaults={"_format": "html"}, requirements={"_format": "xml|html"})
-	 * @Template()
-	 */
-	public function indexAction()
-	{
+    /**
+     * @Route("/mapa-strony.{_format}", name="sitemap", defaults={"_format": "html"}, requirements={"_format": "xml|html"})
+     * @Template()
+     */
+    public function indexAction()
+    {
         $base = new \AppBundle\Utils\Base($this->getDoctrine());
-        return ['backgroundFileName' => $base->getFileFor('tlo')];
-	}
+        return [
+            'backgroundFileName' => $base->getFileFor('tlo'),
+            'carouselPhotos' => $base->getFilesFor('slajder'),
+        ];
+    }
 }
 
