@@ -18,6 +18,7 @@ class LocalizationController extends Controller
     {
             $base = new \AppBundle\Utils\Base($this->getDoctrine());
         return [
+            'apiKey' => $this->getParameter('api_key'),
             'backgroundFileName' => $base->getFileFor('tlo'),
             'title' => 'Willa Aziza w Kościelisku',
             'content' => 'Kościelisko usytuowane jest na zachód od Zakopanego, '

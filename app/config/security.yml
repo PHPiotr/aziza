@@ -24,4 +24,5 @@ security:
                 path:   /logout
                 target: /
     access_control:
+        - { path: ^/, requires_channel: https, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_USER }
